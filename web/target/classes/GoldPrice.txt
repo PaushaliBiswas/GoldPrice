@@ -1,3 +1,0 @@
-Gold Price (per gram):  4567.0
-Weight (in grams):      6.0
-Total Price:            27402.0
