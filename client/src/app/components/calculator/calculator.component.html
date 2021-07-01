@@ -1,0 +1,45 @@
+<div class="container-fluid" (window:beforeunload)="logout()">
+    <div class="row justify-content-end mr-3">
+        <p>Welcome: {{usertype}} User</p>
+    </div>
+    <div class="row justify-content-around my-5 py-5">
+        <div class="col-md-7 pr-5">
+            <form [formGroup]="calculatorForm">
+                <div class="form-control-feedback text-danger" *ngIf="printError != null">{{printError}}</div>
+                <div class="form-group row">
+                    <div class="col-md-3"><label for="rate">Gold Price (per gram): </label></div>
+                    <div class="col-md-9">
+                        <input type="number" class="form-control" id="rate" formControlName="rate">
+                        <div class="form-control-feedback text-danger" *ngIf="rateError != null">{{rateError}}</div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3"><label for="weight">Weight (grams): </label></div>
+                    <div class="col-md-9">
+                        <input type="number" class="form-control" id="weight" formControlName="weight">
+                        <div class="form-control-feedback text-danger" *ngIf="weightError != null">{{weightError}}</div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3"><label for="price">Total Price: </label></div>
+                    <div class="col-sm-9"><input type="number" readonly class="form-control" id="price" formControlName="price"></div>
+                </div>
+                <div class="form-group row" *ngIf="usertype == 'privileged'">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"><label for="discount">Discount%: </label></div>
+                    <div class="col-md-6"><input type="number" readonly class="form-control" id="discount" formControlName="discount"></div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3"><button type="submit" class="btn btn-primary form-control" (click)="calculate()">Calculate</button></div>
+                    <div class="col-md-3"><button type="button" class="btn btn-primary form-control" (click)="download('S')">Print to screen</button></div>
+                    <div class="col-md-3"><button type="button" class="btn btn-primary form-control" (click)="download('F')">Print to file</button></div>
+                    <div class="col-md-3"><button type="button" class="btn btn-primary form-control" (click)="download('P')">Print to paper</button></div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="offset-md-9 col-md-3"><button type="submit" class="btn btn-primary form-control" (click)="logout()">Close</button></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
