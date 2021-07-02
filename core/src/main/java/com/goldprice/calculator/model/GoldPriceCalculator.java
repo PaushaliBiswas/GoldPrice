@@ -13,11 +13,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class GoldPriceCalculator implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private double rate;
 	private double weight;
 	private double price;
 	private double discount;
-	
+
 	@Override
 	public String toString() {
 		String str = "Gold Price (per gram):  " + rate + "\nWeight (in grams):      " + weight;

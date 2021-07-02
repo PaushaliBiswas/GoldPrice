@@ -14,6 +14,9 @@ public class User {
 	private String username;
 	private String password;
 	private String userType;
+	private String errorMsg;
 	
-	//public User(){}
+	public User(String errorMsg) {
+		this.errorMsg = errorMsg;
+	}
 }
