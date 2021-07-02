@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CalculatorComponent } from './components/calculator/calculator.component';
 import { LoginComponent } from './components/login/login.component';
+import { GoldPriceConstants } from './constants/gold-price-constants';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { LoginComponent } from './components/login/login.component';
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [GoldPriceConstants],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
