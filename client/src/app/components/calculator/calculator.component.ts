@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { GoldPriceConstants } from 'src/app/constants/gold-price-constants';
 import { GoldPrice } from 'src/app/models/gold-price';
 import { User } from 'src/app/models/user';
 import { AppService } from 'src/app/services/app.service';
@@ -27,11 +28,11 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     price: new FormControl('')
   });
   
-  constructor(private service: AppService, private router: Router) { }
+  constructor(private service: AppService, private router: Router, private constants: GoldPriceConstants) { }
 
   ngOnInit(): void {
     this.usertype = this.service.getUserType();
-    if(this.usertype === 'privileged')
+    if(this.usertype === this.constants.privileged)
       this.service.getDiscount().subscribe((res: GoldPrice) => this.calculatorForm.get("discount").setValue(res.discount));
   }
 
@@ -41,9 +42,9 @@ export class CalculatorComponent implements OnInit, OnDestroy {
 
   validateForm(action: string): boolean{
     
-    this.rateError = this.calculatorForm.controls.rate.errors ? 'Gold Price is required' : null;
-    this.weightError = this.calculatorForm.controls.weight.errors ? 'Weight is required' : null;
-    this.printError = (action === 'download' && this.calculatorForm.value.price === '') ? 'Please calculate the price first' : null;
+    this.rateError = this.calculatorForm.controls.rate.errors ? this.constants.rateRequired : null;
+    this.weightError = this.calculatorForm.controls.weight.errors ? this.constants.weightRequired : null;
+    this.printError = (action === 'download' && this.calculatorForm.value.price === '') ? this.constants.calculateError : null;
     return (this.rateError === null && this.weightError === null && this.printError === null);
   }
 
@@ -61,7 +62,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   calculate(){
     if(this.validateForm('calculate')){
       var price = this.calculatorForm.value.rate * this.calculatorForm.value.weight;
-      if(this.usertype === 'privileged'){
+      if(this.usertype === this.constants.privileged){
         price = price - (this.calculatorForm.value.discount * price)/100;
       }
       this.calculatorForm.get("price").setValue(price);
