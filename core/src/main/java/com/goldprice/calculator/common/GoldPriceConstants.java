@@ -10,7 +10,9 @@ public enum GoldPriceConstants {
 	WRONG_PASSWORD("Wrong password!"),
 	GET_USER_ERROR("Exception occured while getting user details"),
 	FILE_CREATE_ERROR("Exception pccured while creating file"),
-	FILE_WRITE_ERROR("Exception pccured while writing file");
+	FILE_WRITE_ERROR("Exception pccured while writing file"),
+	PRIVILEGED("Privileged"),
+	REGULAR("Regular");
 	@Getter
 	private final String value;
 }
